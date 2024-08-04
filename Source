@@ -62,12 +62,20 @@ for i,v in pairs(LP.Backpack:GetChildren()) do
 end
 game:GetService("Players").LocalPlayer.Character.Dodge.Skill.Event:FireServer()
 until game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0
+   elseif lowercaseMessage:find("/e godmode2") then
+local args = {"Megumi Fushiguro"}
+game:GetService("ReplicatedStorage").Picked:FireServer(unpack(args))
+  task.wait(0.4)
+game:GetService("Players").LocalPlayer.Backpack.Mahoraga.Mahoraga.RemoteEvent:FireServer()
+   task.wait(2)
+ game:GetService("Players").LocalPlayer.Backpack["Mukbang Finger"].Script.Event:FireServer()
    elseif lowercaseMessage:find("/e cmds") then
    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Mobile%20Friendly%20Orion')))()
   hjui = [[
    Available commands:
    /e heal
    /e godmode
+   /e godmode2
    /e cmds
    Few, but soon there will be more commands
   ]]
