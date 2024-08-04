@@ -76,6 +76,7 @@ game:GetService("Players").LocalPlayer.Backpack.Mahoraga.Mahoraga.RemoteEvent:Fi
    /e heal
    /e godmode
    /e bugmode
+   /e shoot [Name/DisplayName]
    /e cmds
    Few, but soon there will be more commands
   ]]
@@ -89,3 +90,45 @@ game:GetService("Players").LocalPlayer.Backpack.Mahoraga.Mahoraga.RemoteEvent:Fi
 end
 
 game.Players.LocalPlayer.Chatted:Connect(onPlayerChattedA)
+
+local player = game.Players.LocalPlayer
+local function onChatted(message)
+    local parts = string.split(message, " ")
+    if #parts >= 3 and parts[1] == "/e" and parts[2] == "shoot" then
+        local targetPlayerName = parts[3]
+        if targetPlayerName == "random*" then
+            local randomPlayer = game.Players:GetPlayers()[math.random(1, #game.Players:GetPlayers())]
+            if randomPlayer then
+                local args = {
+                    [1] = randomPlayer.Character.HumanoidRootPart.CFrame,
+                    [2] = randomPlayer.Character.Humanoid.Health
+                }
+                game:GetService("Players").LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+            end
+        elseif targetPlayerName == "all*" then
+            for _, otherPlayer in ipairs(game.Players:GetPlayers()) do
+                local args = {
+                    [1] = otherPlayer.Character.HumanoidRootPart.CFrame,
+                    [2] = otherPlayer.Character.Humanoid.Health
+                }
+                game:GetService("Players").LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+            end
+        else
+            for _, otherPlayer in ipairs(game.Players:GetPlayers()) do
+                if string.find(string.lower(otherPlayer.Name), string.lower(targetPlayerName)) or
+                   string.find(string.lower(otherPlayer.DisplayName), string.lower(targetPlayerName)) then
+                    local targetPosition = otherPlayer.Character.HumanoidRootPart.CFrame
+                    local args = {
+                        [1] = targetPosition,
+                        [2] = otherPlayer.Character.Humanoid.Health
+                    }
+                    game:GetService("Players").LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+                    return
+                end
+            end
+            print("Player not found")
+        end
+    end
+end
+
+player.Chatted:Connect(onChatted)
