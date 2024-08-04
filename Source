@@ -1,0 +1,83 @@
+local function onPlayerChattedA(message, player)
+    local lowercaseMessage = message:lower()
+    
+    if lowercaseMessage:find("/e heal") then
+       local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local function activateRandomAbility()
+    local players = Players:GetPlayers()
+
+    for _, player in ipairs(players) do
+        if player ~= LocalPlayer then
+            local tools = player.Backpack:GetChildren()
+
+            for _, tool in ipairs(tools) do
+                local remoteEvents = {}
+                for _, descendant in ipairs(tool:GetDescendants()) do
+                    if descendant:IsA("RemoteEvent") then
+                        table.insert(remoteEvents, descendant)
+                    end
+                end
+
+                if #remoteEvents > 0 then
+                    local randomEvent = remoteEvents[math.random(1, #remoteEvents)]
+                    for i = 1, 1 do
+                       if tool.Name == "Reverse Cursed Technique" or tool.Name == "Heal" then
+                        randomEvent:FireServer()
+                       end
+                    end
+                else
+                    for _, descendant in ipairs(tool:GetDescendants()) do
+                        if descendant:IsA("RemoteFunction") then
+                            descendant:InvokeServer()
+                            break
+                        elseif descendant:IsA("BindableEvent") then
+                            descendant:Fire()
+                            break
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+activateRandomAbility()
+   elseif lowercaseMessage:find("/e godmode") then
+   local args = {
+    [1] = "Ayanokoji Kiyotaka"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Picked"):FireServer(unpack(args))
+   wait(0.35)
+repeat
+   task.wait()
+   local LP = game.Players.LocalPlayer
+repeat wait() until LP.Character
+for i,v in pairs(LP.Backpack:GetChildren()) do
+   if v.Name == "Dodge" then
+       v.Parent = LP.Character
+   end
+end
+game:GetService("Players").LocalPlayer.Character.Dodge.Skill.Event:FireServer()
+until game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0
+   elseif lowercaseMessage:find("/e cmds") then
+   local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Mobile%20Friendly%20Orion')))()
+  hjui = [[
+   Available commands:
+   /e heal
+   /e godmode
+   /e cmds
+   Few, but soon there will be more commands
+  ]]
+   OrionLib:MakeNotification({
+	Name = "Budgie Hub",
+	Content = hjui,
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+    end
+end
+
+game.Players.LocalPlayer.Chatted:Connect(onPlayerChattedA)
