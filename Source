@@ -62,7 +62,7 @@ for i,v in pairs(LP.Backpack:GetChildren()) do
 end
 game:GetService("Players").LocalPlayer.Character.Dodge.Skill.Event:FireServer()
 until game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0
-   elseif lowercaseMessage:find("/e godmodetwo") then
+   elseif lowercaseMessage:find("/e bugmode") then
 local args = {"Megumi Fushiguro"}
 game:GetService("ReplicatedStorage").Picked:FireServer(unpack(args))
   task.wait(0.4)
@@ -75,7 +75,7 @@ game:GetService("Players").LocalPlayer.Backpack.Mahoraga.Mahoraga.RemoteEvent:Fi
    Available commands:
    /e heal
    /e godmode
-   /e godmodetwo
+   /e bugmode
    /e cmds
    Few, but soon there will be more commands
   ]]
