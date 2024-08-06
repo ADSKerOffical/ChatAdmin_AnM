@@ -65,7 +65,7 @@ until game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0
    elseif lowercaseMessage:find("/e bugmode") then
 local args = {"Megumi Fushiguro"}
 game:GetService("ReplicatedStorage").Picked:FireServer(unpack(args))
-  task.wait(0.4)
+  task.wait(0.7)
 game:GetService("Players").LocalPlayer.Backpack.Mahoraga.Mahoraga.RemoteEvent:FireServer()
    task.wait(2)
  game:GetService("Players").LocalPlayer.Backpack["Mukbang Finger"].Script.Event:FireServer()
